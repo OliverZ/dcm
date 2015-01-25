@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -57,17 +58,6 @@ namespace WpfApplication1
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.UseShellExecute = false;
             p.Start();
-
-
-            // instead of p.WaitForExit(), do
-            StringBuilder q = new StringBuilder();
-            while (!p.HasExited)
-            {
-                q.Append(p.StandardOutput.ReadToEnd());
-            }
-            string r = q.ToString();
-
-        //   dcmodify.exe -nb -m "(0010,0010)=foo^bar" IM-0001-0010.dcm
         }
 
         private void ButtonRenameTo(object sender, RoutedEventArgs e)
@@ -95,7 +85,7 @@ namespace WpfApplication1
 
             var fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe"); 
             p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -m \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text));
-            //...
+           
             p.Start();
         }
 
@@ -109,9 +99,40 @@ namespace WpfApplication1
 
         private void ButtonTagList(object sender, RoutedEventArgs e)
         {
-            textfoo.Text = dcmtagcombobox.Text;
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            var fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe");
+
+         //  var onlyNumberFromTagList = dcmtagcombobox.Text.Split("   "); // TODO: ADD HERE SPLITTING 
+     
+            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -m \"({0})={1}\" {2}", dcmtagcombobox.Text, customValueForTagList.Text, path.Text));
+            p.Start();
         }
 
- 
+        private void ComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+   
+            List<string> data = new List<string>();
+            int counter = 0;
+            string line;
+            data.Add("tag");
+            // Read the file and display it line by line.
+            var fullPathToTagList = System.IO.Path.Combine("dcmtk", "dicomtaglist.txt");
+             System.IO.StreamReader file = new System.IO.StreamReader(fullPathToTagList);
+             while ( ( line = file.ReadLine() ) != null )
+             {
+                 data.Add(line);
+                 counter++;
+             }
+             file.Close();
+             
+            // ... Get the ComboBox reference.
+            var comboBox = sender as ComboBox;
+
+            // ... Assign the ItemsSource to the List.
+            comboBox.ItemsSource = data;
+
+            // ... Make the first item selected.
+            comboBox.SelectedIndex = 0;
+        }
     }
 }

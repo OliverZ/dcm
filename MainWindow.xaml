@@ -18,15 +18,10 @@
         <TextBox Name="customValue" HorizontalAlignment="Left" Height="23" Margin="49,154,0,0" TextWrapping="Wrap" Text="19810430" VerticalAlignment="Top" Width="90" Grid.Column="1"/>
         <Button Content="changeID" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
         <TextBox Name="patientsID" HorizontalAlignment="Left" Height="23" Margin="100,119,0,0" TextWrapping="Wrap" Text="12345" VerticalAlignment="Top" Width="192" RenderTransformOrigin="0.292,0.304" Grid.ColumnSpan="2"/>
-        <ComboBox Name="dcmtagcombobox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="100,182,0,0" Grid.ColumnSpan="2">
-            <ComboBoxItem>One</ComboBoxItem>
-            <ComboBoxItem>Two</ComboBoxItem>
-            <ComboBoxItem>0002,0102   PrivateInformation</ComboBoxItem>
-            <ComboBoxItem>0004,1130   FileSetID</ComboBoxItem>
-            <ComboBoxItem>0004,1141   FileSetDescriptorFileID</ComboBoxItem>
+        <ComboBox Name="dcmtagcombobox" Loaded="ComboBox_Loaded" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="100,182,0,0" Grid.ColumnSpan="2">
         </ComboBox>
-        <Button Content="tag list" HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top" Width="75" Click="ButtonTagList"/>
-        <TextBox Name="textfoo" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="49,182,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="90"/>
+        <Button Content="tag list mod" HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top" Width="75" Click="ButtonTagList"/>
+        <TextBox Name="customValueForTagList" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="49,182,0,0" TextWrapping="Wrap" Text="value" VerticalAlignment="Top" Width="90"/>
 
     </Grid>
 </Window>
