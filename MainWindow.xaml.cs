@@ -49,17 +49,6 @@ namespace WpfApplication1
               
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo = new ProcessStartInfo(@"dcmtk\dcmodify.exe", "-nb -m \"(0010,0010)=baz^bar\" dcmtk\\IM-0001-0010.dcm");
-
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.UseShellExecute = false;
-            p.Start();
-        }
-
         private void ButtonRenameTo(object sender, RoutedEventArgs e)
         { 
             System.Diagnostics.Process p = new System.Diagnostics.Process();
@@ -69,14 +58,6 @@ namespace WpfApplication1
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.UseShellExecute = false;
             p.Start();
-
-            // instead of p.WaitForExit(), do
-            StringBuilder q = new StringBuilder();
-            while (!p.HasExited)
-            {
-                q.Append(p.StandardOutput.ReadToEnd());
-            }
-            string r = q.ToString();
         }
 
         private void ButtonCustomTag(object sender, RoutedEventArgs e)
@@ -89,7 +70,7 @@ namespace WpfApplication1
             p.Start();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_ID(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             var fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe");
@@ -102,15 +83,14 @@ namespace WpfApplication1
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             var fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe");
 
-         //  var onlyNumberFromTagList = dcmtagcombobox.Text.Split("   "); // TODO: ADD HERE SPLITTING 
-     
-            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -m \"({0})={1}\" {2}", dcmtagcombobox.Text, customValueForTagList.Text, path.Text));
+            var onlyNumberFromTagList = dcmtagcombobox.Text.Split(new Char[] {' '});
+            dbgblock.Text = string.Format("-nb -m \"({0})={1}\" {2}", onlyNumberFromTagList[0], customValueForTagList.Text, path.Text);
+            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -m \"({0})={1}\" {2}", onlyNumberFromTagList[0], customValueForTagList.Text, path.Text));
             p.Start();
         }
 
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
         {
-   
             List<string> data = new List<string>();
             int counter = 0;
             string line;
