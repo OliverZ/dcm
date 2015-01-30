@@ -70,7 +70,7 @@ namespace WpfApplication1
             p.Start();
         }
 
-        private void Button_Click_ID(object sender, RoutedEventArgs e)
+        private void Button_ID(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             var fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe");
@@ -113,6 +113,21 @@ namespace WpfApplication1
 
             // ... Make the first item selected.
             comboBox.SelectedIndex = 0;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // ... Get the ComboBox.
+            var comboBox = sender as ComboBox;
+
+            string value = comboBox.SelectedItem as string;
+        
+            string[] stringSeparators = new string[] { "   " };
+            string[] result;
+
+            result = value.Split(stringSeparators, StringSplitOptions.None);
+            var onlyNumberFromTagList = result[0];
+            customTag.Text = onlyNumberFromTagList;
         }
     }
 }
