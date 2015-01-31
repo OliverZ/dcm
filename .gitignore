@@ -21,6 +21,7 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+[Dd]eploy/
 
 # Roslyn cache directories
 *.ide/
@@ -194,3 +195,4 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+

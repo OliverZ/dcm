@@ -66,7 +66,7 @@ namespace WpfApplication1
 
             var fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe"); 
             p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -m \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text));
-           
+            dbgblock.Text = string.Format("-nb -m \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text);
             p.Start();
         }
 
