@@ -10,7 +10,7 @@
         <Image Source="img/b.jpg" Stretch="UniformToFill" Grid.ColumnSpan="2" />
 
         <Button Content="choose dir" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="75" Click="ChooseDirButton" />
-        <TextBox Name="path"  HorizontalAlignment="Left" Height="23" Margin="100,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2"/>
+        <TextBox Name="path"  HorizontalAlignment="Left" Height="60" Margin="100,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2"/>
         <Button Content="rename to" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Width="75" Click="ButtonRenameTo"/>
         <TextBox Name="patientsName" HorizontalAlignment="Left" Height="23" Margin="100,91,0,0" TextWrapping="Wrap" Text="Firstname^Lastname" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2" />
         <Button Content="customtag" HorizontalAlignment="Left" Margin="10,154,0,0" VerticalAlignment="Top" Width="75" Click="ButtonCustomTag"/>
@@ -21,7 +21,8 @@
         <ComboBox Name="dcmtagcombobox" SelectionChanged="ComboBox_SelectionChanged" Loaded="ComboBox_Loaded" HorizontalAlignment="Left" VerticalAlignment="Top" Width="17" Margin="27,154,0,0" Grid.Column="1" Height="23"/>
         <Button Content="tag list mod" HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top" Width="75" Click="ButtonTagList"/>
         <TextBox Name="customValueForTagList" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="49,182,0,0" TextWrapping="Wrap" Text="value" VerticalAlignment="Top" Width="90"/>
-        <TextBlock Name="dbgblock" HorizontalAlignment="Left" Margin="10,223,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="68" Width="282"/>
+        <TextBlock Name="dbgblock" HorizontalAlignment="Left" Margin="10,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="68" Width="282"/>
+        <Label Content="dcmodify parameters:" HorizontalAlignment="Left" Margin="10,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,0.269" Grid.ColumnSpan="2" Width="282" Height="30"/>
 
     </Grid>
 </Window>
