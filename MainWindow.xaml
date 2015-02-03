@@ -13,15 +13,13 @@
         <TextBox Name="path"  HorizontalAlignment="Left" Height="60" Margin="100,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2"/>
         <Button Content="rename to" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Width="75" Click="ButtonRenameTo"/>
         <TextBox Name="patientsName" HorizontalAlignment="Left" Height="23" Margin="100,91,0,0" TextWrapping="Wrap" Text="Firstname^Lastname" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2" />
-        <Button Content="customtag" HorizontalAlignment="Left" Margin="10,154,0,0" VerticalAlignment="Top" Width="75" Click="ButtonCustomTag"/>
-        <TextBox Name="customTag" HorizontalAlignment="Left" Height="23" Margin="100,154,0,0" TextWrapping="Wrap" Text="0010,0030" VerticalAlignment="Top" Width="80" Grid.ColumnSpan="2"/>
-        <TextBox Name="customValue" HorizontalAlignment="Left" Height="23" Margin="49,154,0,0" TextWrapping="Wrap" Text="19810430" VerticalAlignment="Top" Width="90" Grid.Column="1"/>
-        <Button Content="changeID" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="75" Click="Button_ID"/>
+        <Button Content="custom tag" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="75" Click="ButtonCustomTag" Height="49"/>
+        <TextBox Name="customTag" HorizontalAlignment="Left" Height="23" Margin="100,154,0,0" TextWrapping="Wrap" Text="0010,0030" VerticalAlignment="Top" Width="175" Grid.ColumnSpan="2"/>
+        <TextBox Name="customValue" HorizontalAlignment="Left" Height="23" Margin="100,182,0,0" TextWrapping="Wrap" Text="19810430" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2"/>
+        <Button Content="changeID" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="75" Click="ButtonID"/>
         <TextBox Name="patientsID" HorizontalAlignment="Left" Height="23" Margin="100,119,0,0" TextWrapping="Wrap" Text="12345" VerticalAlignment="Top" Width="192" RenderTransformOrigin="0.292,0.304" Grid.ColumnSpan="2"/>
-        <ComboBox Name="dcmtagcombobox" SelectionChanged="ComboBox_SelectionChanged" Loaded="ComboBox_Loaded" HorizontalAlignment="Left" VerticalAlignment="Top" Width="17" Margin="27,154,0,0" Grid.Column="1" Height="23"/>
-        <Button Content="tag list mod" HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top" Width="75" Click="ButtonTagList"/>
-        <TextBox Name="customValueForTagList" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="49,182,0,0" TextWrapping="Wrap" Text="value" VerticalAlignment="Top" Width="90"/>
-        <TextBlock Name="dbgblock" HorizontalAlignment="Left" Margin="10,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="68" Width="282"/>
+        <ComboBox Name="dcmtagcombobox" SelectionChanged="ComboBoxDicomTagsSelectionChanged" Loaded="ComboBoxDicomTagsLoaded" HorizontalAlignment="Left" VerticalAlignment="Top" Width="17" Margin="127,154,0,0" Grid.Column="1" Height="23" RenderTransformOrigin="0.706,0.435"/>
+        <TextBox Name="dbgblock" IsReadOnly ="True" Background="Transparent" HorizontalAlignment="Left" Margin="10,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="68" Width="282" BorderThickness="0"/>
         <Label Content="dcmodify parameters:" HorizontalAlignment="Left" Margin="10,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,0.269" Grid.ColumnSpan="2" Width="282" Height="30"/>
 
     </Grid>
