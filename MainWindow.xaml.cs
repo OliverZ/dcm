@@ -53,7 +53,7 @@ namespace WpfApplication1
         { 
             System.Diagnostics.Process p = new System.Diagnostics.Process();
 
-            p.StartInfo = new ProcessStartInfo(@"dcmtk\dcmodify.exe", string.Format("-nb -m \"(0010,0010)={0}\" {1}", patientsName.Text, path.Text));
+            p.StartInfo = new ProcessStartInfo(@"dcmtk\dcmodify.exe", string.Format("-nb -ma \"(0010,0010)={0}\" {1}", patientsName.Text, path.Text));
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.UseShellExecute = false;
@@ -65,8 +65,8 @@ namespace WpfApplication1
             System.Diagnostics.Process p = new System.Diagnostics.Process();
 
             var fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe"); 
-            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -m \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text));
-            dbgblock.Text = string.Format("-nb -m \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text);
+            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -ma \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text));
+            dbgblock.Text = string.Format("-nb -ma \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text);
             p.Start();
         }
 
@@ -74,7 +74,7 @@ namespace WpfApplication1
         {
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             var fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe");
-            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -m \"(0010,0020)={0}\" {1}", patientsID.Text, path.Text));
+            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -ma \"(0010,0020)={0}\" {1}", patientsID.Text, path.Text));
             p.Start();
         }
 
@@ -84,8 +84,8 @@ namespace WpfApplication1
             var fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe");
 
             var onlyNumberFromTagList = dcmtagcombobox.Text.Split(new Char[] {' '});
-            dbgblock.Text = string.Format("-nb -m \"({0})={1}\" {2}", onlyNumberFromTagList[0], customValueForTagList.Text, path.Text);
-            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -m \"({0})={1}\" {2}", onlyNumberFromTagList[0], customValueForTagList.Text, path.Text));
+            dbgblock.Text = string.Format("-nb -ma \"({0})={1}\" {2}", onlyNumberFromTagList[0], customValueForTagList.Text, path.Text);
+            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -ma \"({0})={1}\" {2}", onlyNumberFromTagList[0], customValueForTagList.Text, path.Text));
             p.Start();
         }
 
