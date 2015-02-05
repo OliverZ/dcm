@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
 
-namespace WpfApplication1
+namespace dcmeditor
 {
 
     public partial class MainWindow : Window

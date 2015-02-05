@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dcmedit", "dcmedit.csproj", "{80D2A88E-2B47-41A9-8409-5F52CDA92EB2}"
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dcmeditor", "dcmeditor.csproj", "{80D2A88E-2B47-41A9-8409-5F52CDA92EB2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D797403F-7386-4C43-B8D2-CDFCC6D064DA}"
 	ProjectSection(SolutionItems) = preProject
