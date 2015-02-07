@@ -163,6 +163,7 @@ ClientBin/
 *.publishsettings
 node_modules/
 bower_components/
+Testfiles/
 
 # RIA/Silverlight projects
 Generated_Code/
@@ -195,4 +196,3 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
-

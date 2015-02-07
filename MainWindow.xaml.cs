@@ -67,6 +67,19 @@ namespace dcmeditor
             p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -ma \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text));
             dbgblock.Text = string.Format("-nb -ma \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text);
             p.Start();
+
+            while (!p.HasExited) { } // wait till process ends
+            var errorlevel = p.ExitCode.ToString();
+            if ( p.HasExited && (errorlevel != "0") )
+            {
+                MessageBox.Show(
+                    "An Error Occured\nErrorlevel: "+ p.ExitCode.ToString(),
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
+                
         }
 
         private void ButtonID(object sender, RoutedEventArgs e)
@@ -82,15 +95,14 @@ namespace dcmeditor
             int counter = 0;
             string line;
             data.Add("tag");
-            // Read the file and display it line by line.
             var fullPathToTagList = System.IO.Path.Combine("dcmtk", "dicomtaglist.txt");
-             System.IO.StreamReader file = new System.IO.StreamReader(fullPathToTagList);
-             while ( ( line = file.ReadLine() ) != null )
-             {
-                 data.Add(line);
-                 counter++;
-             }
-             file.Close();
+            System.IO.StreamReader file = new System.IO.StreamReader(fullPathToTagList);
+            while ( ( line = file.ReadLine() ) != null )
+            {
+                data.Add(line);
+                counter++;
+            }
+            file.Close();
              
             // ... Get the ComboBox reference.
             var comboBox = sender as ComboBox;
