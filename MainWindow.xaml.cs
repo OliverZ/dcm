@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -41,9 +42,7 @@ namespace dcmeditor
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 selectedPath = dialog.FileName;
-                // Open document 
                 string filename = selectedPath.ToString();
-                // Write Filename to TextBox
                 path.Text = System.IO.Path.Combine(filename, "*");
             }          
               
@@ -66,20 +65,32 @@ namespace dcmeditor
 
             p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -ma \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text));
             dbgblock.Text = string.Format("-nb -ma \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text);
+
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            
             p.Start();
 
             while (!p.HasExited) { } // wait till process ends
+
             var errorlevel = p.ExitCode.ToString();
             if ( p.HasExited && (errorlevel != "0") )
             {
-                MessageBox.Show(
-                    "An Error Occured\nErrorlevel: "+ p.ExitCode.ToString(),
-                    "Error",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error
-                );
-            }
-                
+                StreamReader standardOutputReader = p.StandardOutput;
+                StreamReader errorStreamReader = p.StandardError;
+                showErrorMessageBox(errorlevel, standardOutputReader, errorStreamReader);
+            }  
+        }
+
+        private static void showErrorMessageBox(String errorlevel, StreamReader standardOutputReader, StreamReader errorStreamReader)
+        {
+            MessageBox.Show(
+                "An Error Occured\nErrorlevel: " + errorlevel + "\n" + standardOutputReader.ReadToEnd() + "\n" + errorStreamReader.ReadToEnd(),
+                "Error",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
         }
 
         private void ButtonID(object sender, RoutedEventArgs e)
