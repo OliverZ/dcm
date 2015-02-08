@@ -49,41 +49,56 @@ namespace dcmeditor
         }
 
         private void ButtonRenameTo(object sender, RoutedEventArgs e)
-        { 
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
+        {
+            var tag = "0010,0010";
+            var value = patientsName.Text;
+            var filesPath = path.Text;
 
-            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -ma \"(0010,0010)={0}\" {1}", patientsName.Text, path.Text));
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.UseShellExecute = false;
-            p.Start();
+            Modify(tag, value, filesPath);
+        }
+
+        private void ButtonID(object sender, RoutedEventArgs e)
+        {
+            var tag = "0010,0020";
+            var value = patientsID.Text;
+            var filesPath = path.Text;
+
+            Modify(tag, value, filesPath);
         }
 
         private void ButtonCustomTag(object sender, RoutedEventArgs e)
         {
+            var tag = customTag.Text;
+            var value = customValue.Text;
+            var filesPath = path.Text;
+
+            Modify(tag, value, filesPath);
+        }
+
+        private void Modify(string tag, string value, string filesPath)
+        {
             System.Diagnostics.Process p = new System.Diagnostics.Process();
-
-            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -ma \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text));
-            dbgblock.Text = string.Format("-nb -ma \"({0})={1}\" {2}", customTag.Text, customValue.Text, path.Text);
-
+            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -ma \"({0})={1}\" {2}", tag, value, filesPath));
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.RedirectStandardOutput = true;
-            
+
+            dbgblock.Text = string.Format("-nb -ma \"({0})={1}\" {2}", tag, value, filesPath);
+
             p.Start();
 
             while (!p.HasExited) { } // wait till process ends
 
             var errorlevel = p.ExitCode.ToString();
-            if ( p.HasExited && (errorlevel != "0") )
+            if (p.HasExited && (errorlevel != "0"))
             {
                 StreamReader standardOutputReader = p.StandardOutput;
                 StreamReader errorStreamReader = p.StandardError;
-                showErrorMessageBox(errorlevel, standardOutputReader, errorStreamReader);
-            }  
+                ShowErrorMessageBox(errorlevel, standardOutputReader, errorStreamReader);
+            }
         }
 
-        private static void showErrorMessageBox(String errorlevel, StreamReader standardOutputReader, StreamReader errorStreamReader)
+        private static void ShowErrorMessageBox(string errorlevel, StreamReader standardOutputReader, StreamReader errorStreamReader)
         {
             MessageBox.Show(
                 "An Error Occured\nErrorlevel: " + errorlevel + "\n" + standardOutputReader.ReadToEnd() + "\n" + errorStreamReader.ReadToEnd(),
@@ -91,13 +106,6 @@ namespace dcmeditor
                 MessageBoxButton.OK,
                 MessageBoxImage.Error
             );
-        }
-
-        private void ButtonID(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -ma \"(0010,0020)={0}\" {1}", patientsID.Text, path.Text));
-            p.Start();
         }
 
         private void ComboBoxDicomTagsLoaded(object sender, RoutedEventArgs e)
