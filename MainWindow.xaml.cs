@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -33,18 +34,36 @@ namespace dcmeditor
         private void ChooseDirButton(object sender, RoutedEventArgs e)
         {
 
-            var dialog = new CommonOpenFileDialog();
-            dialog.IsFolderPicker = true;
-            dialog.Title = "Select folder with dicom files";
-            
-            var selectedPath = "";
-
-            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            if (CommonOpenFileDialog.IsPlatformSupported)
             {
-                selectedPath = dialog.FileName;
-                string filename = selectedPath.ToString();
-                path.Text = System.IO.Path.Combine(filename, "*");
-            }          
+                var dialog = new CommonOpenFileDialog();
+                dialog.IsFolderPicker = true;
+                dialog.Title = "Select folder with dicom files";
+
+                var selectedPath = "";
+
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    selectedPath = dialog.FileName;
+                    string filename = selectedPath.ToString();
+                    path.Text = System.IO.Path.Combine(filename, "*");
+                }
+            }
+            else
+            {
+                // Windows Server 2003
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                dialog.Description = "Select folder with dicom files";
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    path.Text = System.IO.Path.Combine(dialog.SelectedPath, "*");
+                }
+                
+            }
+
+         
               
         }
 
@@ -100,11 +119,11 @@ namespace dcmeditor
 
         private static void ShowErrorMessageBox(string errorlevel, StreamReader standardOutputReader, StreamReader errorStreamReader)
         {
-            MessageBox.Show(
+            System.Windows.MessageBox.Show(
                 "An Error Occured\nErrorlevel: " + errorlevel + "\n" + standardOutputReader.ReadToEnd() + "\n" + errorStreamReader.ReadToEnd(),
                 "Error",
-                MessageBoxButton.OK,
-                MessageBoxImage.Error
+                System.Windows.MessageBoxButton.OK,
+                System.Windows.MessageBoxImage.Error
             );
         }
 
@@ -124,10 +143,10 @@ namespace dcmeditor
             file.Close();
              
             // ... Get the ComboBox reference.
-            var comboBox = sender as ComboBox;
+            var comboBox = sender as System.Windows.Forms.ComboBox;
 
             // ... Assign the ItemsSource to the List.
-            comboBox.ItemsSource = data;
+            comboBox.DataSource = data;
 
             // ... Make the first item selected.
             comboBox.SelectedIndex = 0;
@@ -136,7 +155,7 @@ namespace dcmeditor
         private void ComboBoxDicomTagsSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // ... Get the ComboBox.
-            var comboBox = sender as ComboBox;
+            var comboBox = sender as System.Windows.Forms.ComboBox;
 
             string value = comboBox.SelectedItem as string;
         
