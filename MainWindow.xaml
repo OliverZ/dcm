@@ -12,10 +12,10 @@
         <Button Content="choose dir" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="75" Click="ChooseDirButton" />
         <TextBox Name="path"  HorizontalAlignment="Left" Height="60" Margin="100,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2"/>
         <Button Content="rename to" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Width="75" Click="ButtonRenameTo"/>
-        <TextBox Name="patientsName" HorizontalAlignment="Left" Height="23" Margin="100,91,0,0" TextWrapping="Wrap" Text="Firstname^Lastname" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2" />
-        <Button Content="custom tag" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="75" Click="ButtonCustomTag" Height="49"/>
-        <TextBox Name="customTag" HorizontalAlignment="Left" Height="23" Margin="100,154,0,0" TextWrapping="Wrap" Text="0010,0030" VerticalAlignment="Top" Width="175" Grid.ColumnSpan="2"/>
-        <TextBox Name="customValue" HorizontalAlignment="Left" Height="23" Margin="100,182,0,0" TextWrapping="Wrap" Text="19810430" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2"/>
+        <TextBox Name="patientsName" HorizontalAlignment="Left" Height="23" Margin="100,91,0,0" TextWrapping="Wrap" Text="Lastname^Firstname" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2" />
+        <Button Content="other tag" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="75" Click="ButtonOtherTag" Height="49"/>
+        <TextBox Name="otherTag" HorizontalAlignment="Left" Height="23" Margin="100,154,0,0" TextWrapping="Wrap" Text="0010,0030" VerticalAlignment="Top" Width="175" Grid.ColumnSpan="2"/>
+        <TextBox Name="otherValue" HorizontalAlignment="Left" Height="23" Margin="100,182,0,0" TextWrapping="Wrap" Text="19810430" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2"/>
         <Button Content="changeID" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="75" Click="ButtonID"/>
         <TextBox Name="patientsID" HorizontalAlignment="Left" Height="23" Margin="100,119,0,0" TextWrapping="Wrap" Text="12345" VerticalAlignment="Top" Width="192" RenderTransformOrigin="0.292,0.304" Grid.ColumnSpan="2"/>
         <ComboBox Name="dcmtagcombobox" SelectionChanged="ComboBoxDicomTagsSelectionChanged" Loaded="ComboBoxDicomTagsLoaded" HorizontalAlignment="Left" VerticalAlignment="Top" Width="17" Margin="127,154,0,0" Grid.Column="1" Height="23" RenderTransformOrigin="0.706,0.435"/>

@@ -29,7 +29,7 @@ namespace dcmeditor
             InitializeComponent();
         }
 
-        String fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe"); 
+        String fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe");
 
         private void ChooseDirButton(object sender, RoutedEventArgs e)
         {
@@ -60,11 +60,7 @@ namespace dcmeditor
                 {
                     path.Text = System.IO.Path.Combine(dialog.SelectedPath, "*");
                 }
-                
-            }
-
-         
-              
+            }    
         }
 
         private void ButtonRenameTo(object sender, RoutedEventArgs e)
@@ -85,10 +81,10 @@ namespace dcmeditor
             Modify(tag, value, filesPath);
         }
 
-        private void ButtonCustomTag(object sender, RoutedEventArgs e)
+        private void ButtonOtherTag(object sender, RoutedEventArgs e)
         {
-            var tag = customTag.Text;
-            var value = customValue.Text;
+            var tag = otherTag.Text;
+            var value = otherValue.Text;
             var filesPath = path.Text;
 
             Modify(tag, value, filesPath);
@@ -135,6 +131,7 @@ namespace dcmeditor
             data.Add("tag");
             var fullPathToTagList = System.IO.Path.Combine("dcmtk", "dicomtaglist.txt");
             System.IO.StreamReader file = new System.IO.StreamReader(fullPathToTagList);
+            Console.WriteLine("fullpath:" + fullPathToTagList);
             while ( ( line = file.ReadLine() ) != null )
             {
                 data.Add(line);
@@ -143,10 +140,10 @@ namespace dcmeditor
             file.Close();
              
             // ... Get the ComboBox reference.
-            var comboBox = sender as System.Windows.Forms.ComboBox;
+            var comboBox = sender as System.Windows.Controls.ComboBox;
 
             // ... Assign the ItemsSource to the List.
-            comboBox.DataSource = data;
+            comboBox.ItemsSource = data;
 
             // ... Make the first item selected.
             comboBox.SelectedIndex = 0;
@@ -155,7 +152,7 @@ namespace dcmeditor
         private void ComboBoxDicomTagsSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // ... Get the ComboBox.
-            var comboBox = sender as System.Windows.Forms.ComboBox;
+            var comboBox = sender as System.Windows.Controls.ComboBox;
 
             string value = comboBox.SelectedItem as string;
         
@@ -164,7 +161,7 @@ namespace dcmeditor
 
             result = value.Split(stringSeparators, StringSplitOptions.None);
             var onlyNumberFromTagList = result[0];
-            customTag.Text = onlyNumberFromTagList;
+            otherTag.Text = onlyNumberFromTagList;
         }
     }
 }
