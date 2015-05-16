@@ -30,6 +30,7 @@ namespace dcmeditor
         }
 
         String fullPathToDcmodify = System.IO.Path.Combine("dcmtk", "dcmodify.exe");
+        String fullPathToDcmdump = System.IO.Path.Combine("dcmtk", "dcmdump.exe");
 
         private void ChooseDirButton(object sender, RoutedEventArgs e)
         {
@@ -63,6 +64,38 @@ namespace dcmeditor
             }    
         }
 
+        private void DumpButton(object sender, RoutedEventArgs e)
+        {
+            Process dumpProcess = new Process();
+            ProcessStartInfo dumpProcessStartInfo = new ProcessStartInfo(fullPathToDcmdump, path.Text);
+            dumpProcessStartInfo.UseShellExecute = false;
+            dumpProcessStartInfo.RedirectStandardOutput = true;
+            dumpProcessStartInfo.RedirectStandardError = true;
+            dumpProcessStartInfo.CreateNoWindow = true;
+            dumpProcess.StartInfo = dumpProcessStartInfo;
+            dumpProcess.Start();
+
+            StreamReader standardOutputReader = dumpProcess.StandardOutput;
+            StreamReader errorOutputReader = dumpProcess.StandardError;
+            var dump = standardOutputReader.ReadToEnd();
+            dumpProcess.Close();
+
+            DumpIntoFile(dump);
+            OpenDumpInNotepad();
+        }
+
+        private void DumpIntoFile(String dump)
+        {
+            System.IO.File.WriteAllText("dump.txt", dump);
+        }
+
+        private static void OpenDumpInNotepad()
+        {
+            System.Diagnostics.Process notepadProcess = new System.Diagnostics.Process();
+            notepadProcess.StartInfo = new ProcessStartInfo("notepad.exe", "dump.txt");
+            notepadProcess.Start();
+        }
+
         private void ButtonRenameTo(object sender, RoutedEventArgs e)
         {
             var tag = "0010,0010";
@@ -92,23 +125,24 @@ namespace dcmeditor
 
         private void Modify(string tag, string value, string filesPath)
         {
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -ma \"({0})={1}\" {2}", tag, value, filesPath));
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.RedirectStandardOutput = true;
+            System.Diagnostics.Process modificationProcess = new System.Diagnostics.Process();
+            modificationProcess.StartInfo = new ProcessStartInfo(fullPathToDcmodify, string.Format("-nb -ma \"({0})={1}\" {2}", tag, value, filesPath));
+            modificationProcess.StartInfo.UseShellExecute = false;
+            modificationProcess.StartInfo.RedirectStandardError = true;
+            modificationProcess.StartInfo.RedirectStandardOutput = true;
+            modificationProcess.StartInfo.CreateNoWindow = true;
 
             dbgblock.Text = string.Format("-nb -ma \"({0})={1}\" {2}", tag, value, filesPath);
 
-            p.Start();
+            modificationProcess.Start();
 
-            while (!p.HasExited) { } // wait till process ends
+            while (!modificationProcess.HasExited) { } // wait till process ends
 
-            var errorlevel = p.ExitCode.ToString();
-            if (p.HasExited && (errorlevel != "0"))
+            var errorlevel = modificationProcess.ExitCode.ToString();
+            if (modificationProcess.HasExited && (errorlevel != "0"))
             {
-                StreamReader standardOutputReader = p.StandardOutput;
-                StreamReader errorStreamReader = p.StandardError;
+                StreamReader standardOutputReader = modificationProcess.StandardOutput;
+                StreamReader errorStreamReader = modificationProcess.StandardError;
                 ShowErrorMessageBox(errorlevel, standardOutputReader, errorStreamReader);
             }
         }
@@ -131,7 +165,6 @@ namespace dcmeditor
             data.Add("tag");
             var fullPathToTagList = System.IO.Path.Combine("dcmtk", "dicomtaglist.txt");
             System.IO.StreamReader file = new System.IO.StreamReader(fullPathToTagList);
-            Console.WriteLine("fullpath:" + fullPathToTagList);
             while ( ( line = file.ReadLine() ) != null )
             {
                 data.Add(line);
@@ -162,6 +195,24 @@ namespace dcmeditor
             result = value.Split(stringSeparators, StringSplitOptions.None);
             var onlyNumberFromTagList = result[0];
             otherTag.Text = onlyNumberFromTagList;
+        }
+
+        private void OpenFile(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = false;
+            dialog.Title = "Select dicom file";
+
+            var selectedPath = "";
+
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                selectedPath = dialog.FileName;
+                string filename = selectedPath.ToString();
+                path.Text = filename;
+                // DumpIntoFile(filename);
+                // OpenDumpInNotepad
+            }
         }
     }
 }

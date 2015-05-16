@@ -11,6 +11,7 @@
 
         <Button Content="choose dir" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="75" Click="ChooseDirButton" />
         <TextBox Name="path"  HorizontalAlignment="Left" Height="60" Margin="100,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2"/>
+        <Button Content="dump" HorizontalAlignment="Left" Margin="101,4,0,0" VerticalAlignment="Top" Width="43" Click="DumpButton" Grid.Column="1" />
         <Button Content="rename to" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Width="75" Click="ButtonRenameTo"/>
         <TextBox Name="patientsName" HorizontalAlignment="Left" Height="23" Margin="100,91,0,0" TextWrapping="Wrap" Text="Lastname^Firstname" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2" />
         <Button Content="other tag" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="75" Click="ButtonOtherTag" Height="49"/>
@@ -21,6 +22,8 @@
         <ComboBox Name="dcmtagcombobox" SelectionChanged="ComboBoxDicomTagsSelectionChanged" Loaded="ComboBoxDicomTagsLoaded" HorizontalAlignment="Left" VerticalAlignment="Top" Width="17" Margin="127,154,0,0" Grid.Column="1" Height="23" RenderTransformOrigin="0.706,0.435"/>
         <TextBox Name="dbgblock" IsReadOnly ="True" Background="Transparent" HorizontalAlignment="Left" Margin="10,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="68" Width="282" BorderThickness="0"/>
         <Label Content="dcmodify parameters:" HorizontalAlignment="Left" Margin="10,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,0.269" Grid.ColumnSpan="2" Width="282" Height="30"/>
+        <Button Content="choose file" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="75" Click="OpenFile">
+        </Button>
 
     </Grid>
 </Window>
