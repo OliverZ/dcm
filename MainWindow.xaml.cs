@@ -210,9 +210,20 @@ namespace dcmeditor
                 selectedPath = dialog.FileName;
                 string filename = selectedPath.ToString();
                 path.Text = filename;
-                // DumpIntoFile(filename);
-                // OpenDumpInNotepad
             }
+        }
+
+        private void OnDragOver(object sender, System.Windows.DragEventArgs e)
+        {
+            e.Effects = System.Windows.DragDropEffects.All;
+            string[] files = (string[])e.Data.GetData(System.Windows.DataFormats.FileDrop);
+            path.Text = files[0];
+            e.Handled = true;
+        }
+
+        private void OutputFolderDrop(object sender, System.Windows.DragEventArgs e)
+        {
+
         }
     }
 }
