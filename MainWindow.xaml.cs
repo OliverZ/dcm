@@ -217,13 +217,17 @@ namespace dcmeditor
         {
             e.Effects = System.Windows.DragDropEffects.All;
             string[] files = (string[])e.Data.GetData(System.Windows.DataFormats.FileDrop);
-            path.Text = files[0];
+            
+            if (Directory.Exists(files[0]))
+            {
+                path.Text = System.IO.Path.Combine(files[0],"*");
+            }
+            else
+            {
+                path.Text = files[0];
+            }
+
             e.Handled = true;
-        }
-
-        private void OutputFolderDrop(object sender, System.Windows.DragEventArgs e)
-        {
-
         }
     }
 }
