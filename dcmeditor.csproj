@@ -126,6 +126,7 @@
     <Resource Include="img\b.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="img\Cross.png" />
     <Resource Include="Cross.ico" />
     <Content Include="dcmtk\dcmdump.exe" />
   </ItemGroup>

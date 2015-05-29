@@ -48,6 +48,7 @@ namespace dcmeditor
                     selectedPath = dialog.FileName;
                     string filename = selectedPath.ToString();
                     path.Text = System.IO.Path.Combine(filename, "*");
+                    SurroundPathWithQuotes();
                 }
             }
             else
@@ -60,6 +61,7 @@ namespace dcmeditor
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     path.Text = System.IO.Path.Combine(dialog.SelectedPath, "*");
+                    SurroundPathWithQuotes();
                 }
             }    
         }
@@ -210,6 +212,7 @@ namespace dcmeditor
                 selectedPath = dialog.FileName;
                 string filename = selectedPath.ToString();
                 path.Text = filename;
+                SurroundPathWithQuotes();
             }
         }
 
@@ -226,8 +229,13 @@ namespace dcmeditor
             {
                 path.Text = files[0];
             }
-
+            SurroundPathWithQuotes();
             e.Handled = true;
+        }
+
+        private void SurroundPathWithQuotes()
+        {
+            path.Text = string.Format("\"" + path.Text + "\"");
         }
     }
 }
