@@ -4,27 +4,41 @@
         Title="dicomeditor" Height="352" Width="310" Icon="img/Cross.png" >
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="153*"/>
-            <ColumnDefinition Width="149*"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
-        <Image Source="img/b.jpg" Stretch="UniformToFill" Grid.ColumnSpan="2" />
 
-        <Button Content="choose dir" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="75" Click="ChooseDirButton" />
-        <TextBox Name="path"  HorizontalAlignment="Left" Height="60" Margin="100,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2" PreviewDragOver="OnDragOver" />
-        <Button Content="dump" HorizontalAlignment="Left" Margin="101,4,0,0" VerticalAlignment="Top" Width="43" Click="DumpButton" Grid.Column="1" />
-        <Button Content="rename to" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Width="75" Click="ButtonRenameTo"/>
-        <TextBox Name="patientsName" HorizontalAlignment="Left" Height="23" Margin="100,91,0,0" TextWrapping="Wrap" Text="Lastname^Firstname" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2" />
-        <Button Content="other tag" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="75" Click="ButtonOtherTag" Height="49"/>
-        <TextBox Name="otherTag" HorizontalAlignment="Left" Height="23" Margin="100,154,0,0" TextWrapping="Wrap" Text="0010,0030" VerticalAlignment="Top" Width="175" Grid.ColumnSpan="2"/>
-        <TextBox Name="otherValue" HorizontalAlignment="Left" Height="23" Margin="100,182,0,0" TextWrapping="Wrap" Text="19810430" VerticalAlignment="Top" Width="192" Grid.ColumnSpan="2"/>
-        <Button Content="changeID" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="75" Click="ButtonID"/>
-        <TextBox Name="patientsID" HorizontalAlignment="Left" Height="23" Margin="100,119,0,0" TextWrapping="Wrap" Text="12345" VerticalAlignment="Top" Width="192" RenderTransformOrigin="0.292,0.304" Grid.ColumnSpan="2"/>
-        <ComboBox Name="dcmtagcombobox" SelectionChanged="ComboBoxDicomTagsSelectionChanged" Loaded="ComboBoxDicomTagsLoaded" HorizontalAlignment="Left" VerticalAlignment="Top" Width="17" Margin="127,154,0,0" Grid.Column="1" Height="23" RenderTransformOrigin="0.706,0.435"/>
-        <TextBox Name="dbgblock" IsReadOnly ="True" Background="Transparent" HorizontalAlignment="Left" Margin="10,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="68" Width="282" BorderThickness="0"/>
-        <Label Content="dcmodify parameters:" HorizontalAlignment="Left" Margin="10,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,0.269" Grid.ColumnSpan="2" Width="282" Height="30"/>
-        <Button Content="choose file" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="75" Click="OpenFile">
-        </Button>
+        <Button Content="dump" Grid.Row="0" Grid.Column="1" Margin="5" HorizontalAlignment="Right" Width="40" Click="DumpButton" />
 
+        <Button Content="choose dir" Grid.Row="1" Grid.Column="0" Margin="5" Click="ChooseDirButton" VerticalAlignment="Top" />
+        <Button Content="choose file" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Bottom" Click="OpenFile"/>
+        <TextBox Name="path" Grid.Row="1" Grid.Column="1" Margin="5" Height="60" TextWrapping="Wrap" Text=""  PreviewDragOver="OnDragOver" />
+
+        <Button Content="rename to" Grid.Row="2" Grid.Column="0" Margin="5" Click="ButtonRenameTo"/>
+        <TextBox Name="patientsName" Grid.Row="2" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="Lastname^Firstname" />
+
+        <Button Content="changeID" Grid.Row="3" Grid.Column="0" Margin="5" Click="ButtonID"/>
+        <TextBox Name="patientsID" Grid.Row="3" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="12345" />
+
+        <Button Content="other tag" Grid.Row="4" Grid.Column="0" Margin="5" Height="Auto" Click="ButtonOtherTag" Grid.RowSpan="2" />
+        <TextBox Name="otherTag" Grid.Row="4" Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="0010,0030" />
+        <TextBox Name="otherValue" Grid.Row="5" Grid.Column="1" Margin="5"  MinWidth="50" TextWrapping="Wrap" Text="19810430" />
+
+        <ComboBox Name="dcmtagcombobox" Grid.Row="4" Grid.Column="1" Margin="5" HorizontalAlignment="Right" Width="20" SelectionChanged="ComboBoxDicomTagsSelectionChanged" Loaded="ComboBoxDicomTagsLoaded" />
+        
+        <Label Grid.Row="6" Grid.Column="0" Content="dcmodify parameters:" Grid.ColumnSpan="2"/>
+        <TextBox Name="dbgblock" Grid.Row="7" Grid.Column="0" IsReadOnly ="True" Background="Transparent" TextWrapping="Wrap" Text="" BorderThickness="0" Grid.ColumnSpan="2" />
+        
     </Grid>
 </Window>
